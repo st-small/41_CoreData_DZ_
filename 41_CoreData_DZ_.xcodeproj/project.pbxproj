@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		790F90E91CE46AED006A12CB /* SiSTeacherSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */; };
 		790F90ED1CE472CF006A12CB /* SiSTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790F90EC1CE472CF006A12CB /* SiSTeacherViewController.m */; };
-		791C7ED71CEDB14A00E538CE /* TEST.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C7ED61CEDB14A00E538CE /* TEST.m */; };
 		7921035F1CDE462100D12402 /* Report Card-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 7921035B1CDE462100D12402 /* Report Card-30.png */; };
 		792103601CDE462100D12402 /* School Director-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 7921035C1CDE462100D12402 /* School Director-30.png */; };
 		792103611CDE462100D12402 /* Student Male-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 7921035D1CDE462100D12402 /* Student Male-30.png */; };
@@ -62,8 +61,6 @@
 		790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiSTeacherSelectionViewController.m; sourceTree = "<group>"; };
 		790F90EB1CE472CF006A12CB /* SiSTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiSTeacherViewController.h; sourceTree = "<group>"; };
 		790F90EC1CE472CF006A12CB /* SiSTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiSTeacherViewController.m; sourceTree = "<group>"; };
-		791C7ED51CEDB14A00E538CE /* TEST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEST.h; sourceTree = "<group>"; };
-		791C7ED61CEDB14A00E538CE /* TEST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TEST.m; sourceTree = "<group>"; };
 		7921035B1CDE462100D12402 /* Report Card-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Report Card-30.png"; sourceTree = "<group>"; };
 		7921035C1CDE462100D12402 /* School Director-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "School Director-30.png"; sourceTree = "<group>"; };
 		7921035D1CDE462100D12402 /* Student Male-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Student Male-30.png"; sourceTree = "<group>"; };
@@ -148,8 +145,6 @@
 				790F90EB1CE472CF006A12CB /* SiSTeacherViewController.h */,
 				790F90EC1CE472CF006A12CB /* SiSTeacherViewController.m */,
 				790F90E71CE46AED006A12CB /* SiSTeacherSelectionViewController.h */,
-				791C7ED51CEDB14A00E538CE /* TEST.h */,
-				791C7ED61CEDB14A00E538CE /* TEST.m */,
 				790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */,
 			);
 			name = Teacher;
@@ -439,7 +434,6 @@
 				7938A0241CE4A2CC00674178 /* SiSStudent+CoreDataProperties.m in Sources */,
 				79DEBEF61CDB3C5800D5BE15 /* SiSDataManager.m in Sources */,
 				79DEBEBC1CDB383F00D5BE15 /* AppDelegate.m in Sources */,
-				791C7ED71CEDB14A00E538CE /* TEST.m in Sources */,
 				79DEBEC51CDB383F00D5BE15 /* _1_CoreData_DZ_.xcdatamodeld in Sources */,
 				79F01CA61CDDE3D3008AAF2E /* SiSTeacher.m in Sources */,
 				79DEBEB91CDB383F00D5BE15 /* main.m in Sources */,
