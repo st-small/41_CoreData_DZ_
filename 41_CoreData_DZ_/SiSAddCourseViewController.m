@@ -411,7 +411,7 @@ typedef enum {
         
         vc.course = self.course;
         
-//        vc.delegate = self;
+        vc.delegate = self;
         
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) { // IF WE ARE ON IPAD

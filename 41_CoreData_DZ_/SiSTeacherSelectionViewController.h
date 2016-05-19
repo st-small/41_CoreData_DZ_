@@ -20,7 +20,7 @@
 @property (strong, nonatomic) SiSTeacher* selectedTeacher;
 @property (strong, nonatomic) SiSCourse* course;
 
-@property (strong, nonatomic) SiSTeacher <SiSTeacherSelectionDelegate>* delegate;
+@property (strong, nonatomic) id <SiSTeacherSelectionDelegate> delegate;
 
 @end
 

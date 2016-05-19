@@ -36,6 +36,7 @@
 - (void) actionDone:(UIBarButtonItem*) sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 #pragma mark - === UITableViewDataSource ===
@@ -79,8 +80,10 @@
     if ([self.course.teacher isEqual:teacher]) {
         [self.course.teacher removeCourseObject:self.course];
     } else {
-        [self.course.teacher addCourseObject:self.course];
+        [teacher addCourseObject:self.course];
     }
+    
+    self.course.teacher = teacher;
     
     [self.tableView reloadData];
     
