@@ -52,11 +52,24 @@ typedef enum {
     
     self.labels = @[@"Имя:", @"Фамилия:", @"Эл. почта:"];
     
-    self.placeholders = @[@"First name of student", @"Last name of student", @"Email address of student", @"Student Courses"];
+    self.placeholders = @[@"Имя студента", @"Фамилия студента", @"Email студента", @"Курсы студента"];
     
-    self.sectionsInfos = @[@"Информация о студенте:", @"Teacher in courses:", @"Studying courses:"];
+    self.sectionsInfos = @[@"Информация о студенте:", @"Преподаватель(-ли) курса(-ов):", @"Изучает курсы:"];
     
     [tmpSectionsArray addObject:self.labels];
+    
+    if ([self.student.courses count] > 0) {
+        [tmpSectionsArray addObject:self.student.courses];
+        self.coursesStudying = [self.student.courses allObjects];
+        self.isTeacher = YES;
+    }
+    
+    
+    // Getting array of courses, which user studying himself
+    if ([self.student.courses count] > 0) {
+        self.coursesStudying = [self.student.courses allObjects];
+        [tmpSectionsArray addObject:self.coursesStudying];
+    }
     
     self.sectionsArray = tmpSectionsArray;
     
@@ -174,10 +187,9 @@ typedef enum {
         return [self.labels count];
     }
     
-    if (section == SiSSectionsTypeTeachingCoursesArray && self.isTeacher) {
-        return [self.coursesTeaching count];
-    } else {
-        return [self.coursesStudying count];
+    else {
+        
+         return [self.coursesStudying count];
     }
 }
 
@@ -262,7 +274,7 @@ typedef enum {
     
     // 2nd SECTION - TEACHER IN COURSES SECTION OR STUDYING COURSES SECTION
     
-    if (indexPath.section == SiSSectionsTypeTeachingCoursesArray && self.isTeacher) {
+    if (indexPath.section == SiSSectionsTypeTeachingCoursesArray) {
         
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:teacherInCourseIdentifier];
         
@@ -270,9 +282,16 @@ typedef enum {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:teacherInCourseIdentifier];
         }
         
-        SiSCourse* course = [self.coursesTeaching objectAtIndex:indexPath.row];
+        SiSCourse* course = [self.coursesStudying objectAtIndex:indexPath.row];
+        SiSTeacher* teacher = course.teacher;
         
-        cell.textLabel.text = course.name;
+        if (course.teacher == nil) {
+            
+            teacher = [[SiSDataManager sharedManager] addRandomTeacher];
+            
+        }
+        
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", teacher.firstName, teacher.lastName];
         
         return cell;
         

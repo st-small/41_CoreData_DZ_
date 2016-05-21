@@ -316,6 +316,7 @@ static NSString* kSubjectEcoStockMarket     = @"StockMarket";
         NSUInteger count = [courses count];
         
         SiSCourse* course = [courses objectAtIndex:arc4random_uniform(count)];
+        course.teacher = [self addRandomTeacher];
         
         if (![student.courses containsObject:course]) {
             [student addCoursesObject:course];

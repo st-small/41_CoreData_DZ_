@@ -76,7 +76,7 @@
     NSFetchedResultsController* aFetchResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext
-                                          sectionNameKeyPath:@"subject"
+                                          sectionNameKeyPath:nil
                                                    cacheName:nil];
     
     aFetchResultsController.delegate = self;
