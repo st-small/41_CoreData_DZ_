@@ -136,7 +136,7 @@
     SiSTeacher* teacher = course.teacher;
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", teacher.firstName, teacher.lastName];;
-    //cell.detailTextLabel.text = [teacher.course count];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Преподает %d курс(-ов)", [teacher.course count]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     //CONFIGURE CELL FOR FWTCHING TEACHERS
@@ -152,6 +152,7 @@
     
     
 }
+
 
 
 
