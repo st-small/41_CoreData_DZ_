@@ -186,19 +186,39 @@ static NSString* kSubjectEcoStockMarket     = @"StockMarket";
 
 - (SiSTeacher*) addRandomTeacher {
     
-    SiSTeacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:@"SiSTeacher"
-                                                        inManagedObjectContext:self.managedObjectContext];
+    //CREATE RANDOM TEACHER, BUT CHECK IT: IT SHOULDN'T DUPLICATE
     
-    teacher.firstName = [NSString stringWithFormat:@"Пан %@", firstName[arc4random_uniform(25)]];
-    teacher.lastName = lastName[arc4random_uniform(25)];
+    NSString* name = [NSString stringWithFormat:@"Пан %@", firstName[arc4random_uniform(25)]];
+    NSString* surname = lastName[arc4random_uniform(25)];
     
-    if (teacher.course == nil) {
+    NSFetchRequest *fetch = [NSFetchRequest fetchRequestWithEntityName:@"SiSTeacher"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstName = %@ && lastName = %@", name, surname];
+    fetch.predicate = predicate;
+    
+    NSArray* result = [self.managedObjectContext executeFetchRequest:fetch
+                                                                   error:nil];
+    if ([result count] > 0) {
         
-        teacher.course = [[self generateCourses] objectAtIndex:arc4random_uniform(5) + 1];
+        SiSTeacher* teacher = [result firstObject];
         
+        return teacher;
+        
+    } else {
+        
+        SiSTeacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:@"SiSTeacher"
+                                                            inManagedObjectContext:self.managedObjectContext];
+        teacher.firstName = name;
+        teacher.lastName = surname;
+        
+        if (teacher.course == nil) {
+            
+            teacher.course = [[self generateCourses] objectAtIndex:arc4random_uniform(5) + 1];
+            
+        }
+        
+        return teacher;
     }
     
-    return teacher;
 }
 
 - (SiSCourse*) addCourseWithName:(NSString*) name withSubject:(NSString*)subject andIndustry:(NSString*) industry {
