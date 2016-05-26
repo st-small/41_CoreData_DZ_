@@ -78,8 +78,11 @@
     SiSTeacher* teacher = [self.allTeachers objectAtIndex:indexPath.row];
     
     if ([self.course.teacher isEqual:teacher]) {
+        
         [self.course.teacher removeCourseObject:self.course];
+        
     } else {
+        
         [teacher addCourseObject:self.course];
     }
     
