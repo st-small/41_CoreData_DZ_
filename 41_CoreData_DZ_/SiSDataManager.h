@@ -25,6 +25,7 @@
 - (SiSStudent*) addRandomStudent;
 - (SiSStudent*) addEmptyStudent;
 - (SiSTeacher*) addRandomTeacher;
+- (SiSCourse*) addRandomCourseAndTeacher;
 - (void) clearDataBaseWithName:(NSString*)nameEntity;
 - (void) generateAndAddStudentBatch;
 - (NSArray*) getAllObjectsForName:(NSString*) name andSortUsingDescriptors:(NSArray*) descriptors;

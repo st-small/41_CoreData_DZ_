@@ -210,15 +210,19 @@ static NSString* kSubjectEcoStockMarket     = @"StockMarket";
         teacher.firstName = name;
         teacher.lastName = surname;
         
-        if (teacher.course == nil) {
-            
-            teacher.course = [[self generateCourses] objectAtIndex:arc4random_uniform(5) + 1];
-            
-        }
-        
         return teacher;
     }
     
+}
+
+- (SiSCourse*) addRandomCourseAndTeacher {
+    
+    SiSCourse* course = [[self generateCourses] objectAtIndex:arc4random_uniform(5) + 1];
+    SiSTeacher* teacher = [self addRandomTeacher];
+    
+    course.teacher = teacher;
+    
+    return course;
 }
 
 - (SiSCourse*) addCourseWithName:(NSString*) name withSubject:(NSString*)subject andIndustry:(NSString*) industry {
