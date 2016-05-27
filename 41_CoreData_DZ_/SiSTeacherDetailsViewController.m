@@ -217,7 +217,7 @@ typedef enum {
             case SiSTextFieldTypeLastName:
                 tfText = self.teacher.lastName;
                 tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-                [tf setReturnKeyType:UIReturnKeyNext];
+                [tf setReturnKeyType:UIReturnKeyDone];
                 [tf setAutocapitalizationType:UITextAutocapitalizationTypeWords];
                 [tf setKeyboardType:UIKeyboardTypeDefault];
                 tf.tag = SiSTextFieldTypeLastName;
@@ -303,8 +303,6 @@ typedef enum {
         [textField resignFirstResponder];
         
     } else {
-        
-        [self.textFieldLastName setReturnKeyType:UIReturnKeyDone];
         
         [self.textFieldLastName becomeFirstResponder];
             
