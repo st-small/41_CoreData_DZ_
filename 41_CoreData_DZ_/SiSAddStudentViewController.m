@@ -60,9 +60,9 @@ typedef enum {
         self.coursesStudying = [self.student.courses allObjects];
         [tmpSectionsArray addObject:self.coursesStudying];
         
+        self.teachers = [NSMutableArray array];
+        
         for (SiSCourse* course in self.student.courses) {
-            
-            self.teachers = [NSMutableArray array];
             
             SiSTeacher* teacher = course.teacher;
             
