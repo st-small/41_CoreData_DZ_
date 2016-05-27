@@ -10,6 +10,7 @@
 #import "SiSTeacher.h"
 #import "SiSDataManager.h"
 #import "SiSTeacherViewController.h"
+#import "SiSTeacherDetailsViewController.h"
 
 @interface SiSTeacherViewController ()
 
@@ -46,14 +47,16 @@
 - (void) actionClear:(UIBarButtonItem*) sender {
     
     [[SiSDataManager sharedManager] clearDataBaseWithName:@"SiSTeacher"];
+    [[SiSDataManager sharedManager] clearDataBaseWithName:@"SiSCourse"];
+
 }
 
 - (void)addTeacher:(id)sender {
     
-    //SiSTeacher* teacher = [[SiSDataManager sharedManager] addRandomTeacher];
-    //    SiSAddStudentViewController* vc = [[SiSAddStudentViewController alloc] init];
-    //    vc.student = student;
-    //    [self.navigationController pushViewController:vc animated:YES];
+    SiSTeacher* teacher = [[SiSDataManager sharedManager] addRandomTeacher];
+    SiSTeacherDetailsViewController* vc = [[SiSTeacherDetailsViewController alloc] init];
+    vc.teacher = teacher;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Fetched results controller
@@ -150,7 +153,11 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+    SiSCourse* course = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SiSTeacher* teacher = course.teacher;
+    SiSTeacherDetailsViewController* vc = [[SiSTeacherDetailsViewController alloc] init];
+    vc.teacher = teacher;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
