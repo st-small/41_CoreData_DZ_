@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5288175F1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5288175E1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.m */; };
 		790F90E91CE46AED006A12CB /* SiSTeacherSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */; };
 		790F90ED1CE472CF006A12CB /* SiSTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790F90EC1CE472CF006A12CB /* SiSTeacherViewController.m */; };
 		7921035F1CDE462100D12402 /* Report Card-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 7921035B1CDE462100D12402 /* Report Card-30.png */; };
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5288175D1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiSTeacherDetailsViewController.h; sourceTree = "<group>"; };
+		5288175E1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiSTeacherDetailsViewController.m; sourceTree = "<group>"; };
 		790F90E71CE46AED006A12CB /* SiSTeacherSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiSTeacherSelectionViewController.h; sourceTree = "<group>"; };
 		790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiSTeacherSelectionViewController.m; sourceTree = "<group>"; };
 		790F90EB1CE472CF006A12CB /* SiSTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiSTeacherViewController.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				790F90EC1CE472CF006A12CB /* SiSTeacherViewController.m */,
 				790F90E71CE46AED006A12CB /* SiSTeacherSelectionViewController.h */,
 				790F90E81CE46AED006A12CB /* SiSTeacherSelectionViewController.m */,
+				5288175D1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.h */,
+				5288175E1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.m */,
 			);
 			name = Teacher;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				7938A0281CE4A2E700674178 /* SiSObject+CoreDataProperties.m in Sources */,
 				7938A0241CE4A2CC00674178 /* SiSStudent+CoreDataProperties.m in Sources */,
 				79DEBEF61CDB3C5800D5BE15 /* SiSDataManager.m in Sources */,
+				5288175F1CF75F10008DB8F5 /* SiSTeacherDetailsViewController.m in Sources */,
 				79DEBEBC1CDB383F00D5BE15 /* AppDelegate.m in Sources */,
 				79DEBEC51CDB383F00D5BE15 /* _1_CoreData_DZ_.xcdatamodeld in Sources */,
 				79F01CA61CDDE3D3008AAF2E /* SiSTeacher.m in Sources */,
