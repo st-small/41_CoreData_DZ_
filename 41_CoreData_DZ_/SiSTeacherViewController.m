@@ -53,9 +53,9 @@
 
 - (void)addTeacher:(id)sender {
     
-    SiSTeacher* teacher = [[SiSDataManager sharedManager] addRandomTeacher];
+    SiSCourse* course = [[SiSDataManager sharedManager] addRandomCourseAndTeacher];
     SiSTeacherDetailsViewController* vc = [[SiSTeacherDetailsViewController alloc] init];
-    vc.teacher = teacher;
+    vc.teacher = course.teacher;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
