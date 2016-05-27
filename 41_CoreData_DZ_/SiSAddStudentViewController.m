@@ -72,9 +72,7 @@ typedef enum {
         [tmpSectionsArray addObject:self.teachers];
     }
     
-    
     self.sectionsArray = tmpSectionsArray;
-    
 }
 
 #pragma mark - === Actions ===
@@ -285,14 +283,7 @@ typedef enum {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:teacherInCourseIdentifier];
         }
         
-        SiSCourse* course = [self.coursesStudying objectAtIndex:indexPath.row];
-        SiSTeacher* teacher = course.teacher;
-        
-        if (course.teacher == nil) {
-            
-            teacher = [[SiSDataManager sharedManager] addRandomTeacher];
-            
-        }
+        SiSTeacher* teacher = [self.teachers objectAtIndex:indexPath.row];;
         
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", teacher.firstName, teacher.lastName];
         
@@ -335,66 +326,38 @@ typedef enum {
         if (indexPath.section == SiSSectionsTypeStudyingCoursesArray) {
             
             SiSCourse* course = [self.coursesStudying objectAtIndex:indexPath.row];
-            
             [self.student removeCoursesObject:course];
-            
+            [self.teachers removeObject:course.teacher];
             self.coursesStudying = [self.student.courses allObjects];
-            
+            NSIndexPath* teachers = [NSIndexPath indexPathForRow:indexPath.row inSection:SiSSectionsTypeTeachingCoursesArray];
+            NSIndexPath* courses = [NSIndexPath indexPathForRow:indexPath.row inSection:SiSSectionsTypeStudyingCoursesArray];
             
             [tableView beginUpdates];
-            
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            [tableView deleteRowsAtIndexPaths:@[teachers, courses]
+                             withRowAnimation:UITableViewRowAnimationLeft];
             
             if ([self.coursesStudying count] < 1) {
                 
-                NSMutableArray* temp = [NSMutableArray arrayWithArray:self.sectionsArray];
-                [temp removeObjectAtIndex:indexPath.section];
+                NSMutableArray* temp = [NSMutableArray array];
+                
+                [temp addObject:self.labels];
                 
                 self.sectionsArray = temp;
                 
-                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
-            }
-            
-            [tableView endUpdates];
-            [tableView reloadData];
-            
-        } else {
-            
-            SiSCourse* course = [self.coursesStudying objectAtIndex:indexPath.row];
-            
-            [course removeStudentObject:self.student];
-            
-            self.coursesStudying = [self.student.courses allObjects];
-            
-            [tableView beginUpdates];
-            
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            
-            
-            // IF IT WAS THE LAST ROW IN SECTION
-            if ([self.coursesStudying count] == 0) {
-                NSMutableArray* tmpArr = [NSMutableArray array];
+                NSMutableIndexSet* teachersAndCoursesSectionsSet = [NSMutableIndexSet indexSet];
                 
-                [tmpArr addObject:self.labels];
+                [teachersAndCoursesSectionsSet addIndex:SiSSectionsTypeTeachingCoursesArray];
+                [teachersAndCoursesSectionsSet addIndex:SiSSectionsTypeStudyingCoursesArray];
                 
-                if ([self.coursesStudying count] > 0) {
-                    [tmpArr addObject:self.coursesStudying];
-                }
-                
-                self.sectionsArray = tmpArr;
-                
-                // DELETE SECTION:
-                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
+                [tableView deleteSections:teachersAndCoursesSectionsSet
                          withRowAnimation:UITableViewRowAnimationFade];
             }
             
             [tableView endUpdates];
-            
         }
-        
+            
     }
-
-
+        
 }
 
 #pragma mark - UITextFieldDelegate
