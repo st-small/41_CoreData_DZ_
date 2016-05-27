@@ -6,8 +6,11 @@
 //  Copyright © 2016 Stas. All rights reserved.
 //
 
+#import "SiSTeacherViewController.h"
 #import "SiSDetailsTableViewController.h"
 
 @interface SiSTeacherDetailsViewController : SiSDetailsTableViewController
+
+@property (strong, nonatomic) SiSTeacher* teacher;
 
 @end
