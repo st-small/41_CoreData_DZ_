@@ -15,10 +15,8 @@
 @property (strong, nonatomic) UITextField* textFieldLastName;
 @property (strong, nonatomic) UITextField* textFieldEmail;
 
-@property (strong, nonatomic) NSArray* coursesTeaching;
 @property (strong, nonatomic) NSArray* coursesStudying;
-
-@property (assign, nonatomic) BOOL isTeacher;
+@property (strong, nonatomic) NSMutableArray* teachers;
 
 @property (assign, nonatomic) BOOL isEditMode;
 
@@ -59,17 +57,21 @@ typedef enum {
     [tmpSectionsArray addObject:self.labels];
     
     if ([self.student.courses count] > 0) {
-        [tmpSectionsArray addObject:self.student.courses];
-        self.coursesStudying = [self.student.courses allObjects];
-        self.isTeacher = YES;
-    }
-    
-    
-    // Getting array of courses, which user studying himself
-    if ([self.student.courses count] > 0) {
         self.coursesStudying = [self.student.courses allObjects];
         [tmpSectionsArray addObject:self.coursesStudying];
+        
+        for (SiSCourse* course in self.student.courses) {
+            
+            self.teachers = [NSMutableArray array];
+            
+            SiSTeacher* teacher = course.teacher;
+            
+            [self.teachers addObject:teacher];
+        }
+     
+        [tmpSectionsArray addObject:self.teachers];
     }
+    
     
     self.sectionsArray = tmpSectionsArray;
     
@@ -173,23 +175,24 @@ typedef enum {
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSInteger offset = 0;
     
-    if (section != SiSSectionsTypeStudentInfo && !self.isTeacher) {
-        offset++;
-    }
-    return [self.sectionsInfos objectAtIndex:section+offset];
+    return [self.sectionsInfos objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == SiSSectionsTypeStudentInfo) {
+        
         return [self.labels count];
+        
+    } else if (section == SiSSectionsTypeTeachingCoursesArray) {
+        
+        return [self.teachers count];
     }
     
     else {
         
-         return [self.coursesStudying count];
+        return [self.coursesStudying count];
     }
 }
 
@@ -317,7 +320,7 @@ typedef enum {
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section != SiSSectionsTypeStudentInfo) {
+    if (indexPath.section == SiSSectionsTypeStudyingCoursesArray) {
         
         return YES;
     }
@@ -329,38 +332,31 @@ typedef enum {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        if (indexPath.section == SiSSectionsTypeTeachingCoursesArray && self.isTeacher) {
+        if (indexPath.section == SiSSectionsTypeStudyingCoursesArray) {
             
-            SiSCourse* course = [self.coursesTeaching objectAtIndex:indexPath.row];
+            SiSCourse* course = [self.coursesStudying objectAtIndex:indexPath.row];
             
             [self.student removeCoursesObject:course];
             
-            self.coursesTeaching = [self.student.courses allObjects];
+            self.coursesStudying = [self.student.courses allObjects];
+            
             
             [tableView beginUpdates];
             
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             
-            
-            // IF IT WAS THE LAST ROW IN SECTION
-            if ([self.coursesTeaching count] == 0) {
-                self.isTeacher = NO;
+            if ([self.coursesStudying count] < 1) {
                 
-                NSMutableArray* tmpArr = [NSMutableArray array];
+                NSMutableArray* temp = [NSMutableArray arrayWithArray:self.sectionsArray];
+                [temp removeObjectAtIndex:indexPath.section];
                 
-                [tmpArr addObject:self.labels];
-                if ([self.coursesStudying count] > 0) {
-                    [tmpArr addObject:self.coursesStudying];
-                }
+                self.sectionsArray = temp;
                 
-                self.sectionsArray = tmpArr;
-                
-                // DELETE SECTION:
-                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
-                         withRowAnimation:UITableViewRowAnimationFade];
+                [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
             }
-            [tableView endUpdates];
             
+            [tableView endUpdates];
+            [tableView reloadData];
             
         } else {
             
@@ -381,8 +377,8 @@ typedef enum {
                 
                 [tmpArr addObject:self.labels];
                 
-                if ([self.coursesTeaching count] > 0) {
-                    [tmpArr addObject:self.coursesTeaching];
+                if ([self.coursesStudying count] > 0) {
+                    [tmpArr addObject:self.coursesStudying];
                 }
                 
                 self.sectionsArray = tmpArr;
@@ -393,8 +389,12 @@ typedef enum {
             }
             
             [tableView endUpdates];
+            
         }
+        
     }
+
+
 }
 
 #pragma mark - UITextFieldDelegate
@@ -418,7 +418,7 @@ typedef enum {
             self.student.eMail = self.textFieldEmail.text;
         }
         
-    }else if ([textField isEqual:self.textFieldLastName]){
+    } else if ([textField isEqual:self.textFieldLastName]){
         self.student.lastName = self.textFieldLastName.text;
         if (self.student.lastName != nil) {
             self.textFieldEmail.text = [NSString stringWithFormat:@"%@777@gmail.com",self.textFieldLastName.text];
