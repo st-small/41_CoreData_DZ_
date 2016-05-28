@@ -298,7 +298,7 @@ static NSString* kSubjectEcoStockMarket     = @"StockMarket";
     SiSCourse* humHistoryCourse1 = [self addCourseWithName:@"Ancient Rome history" withSubject:kSubjectHumHistory andIndustry:kDepartmentHumanitarian];
     SiSCourse* humHistoryCourse2 = [self addCourseWithName:@"Slavery in USA" withSubject:kSubjectHumHistory andIndustry:kDepartmentHumanitarian];
     SiSCourse* humHistoryCourse3 = [self addCourseWithName:@"Greek mythology" withSubject:kSubjectHumHistory andIndustry:kDepartmentHumanitarian];
-    SiSCourse* humHistoryCourse4 = [self addCourseWithName:@"Middle Ages histiry" withSubject:kSubjectHumHistory andIndustry:kDepartmentHumanitarian];
+    SiSCourse* humHistoryCourse4 = [self addCourseWithName:@"Middle Ages history" withSubject:kSubjectHumHistory andIndustry:kDepartmentHumanitarian];
     
     NSArray* humCourses = @[humArtCourse1, humArtCourse2, humArtCourse3, humArtCourse4,
                             humLingCourse1, humLingCourse2, humLingCourse3, humLingCourse4,
