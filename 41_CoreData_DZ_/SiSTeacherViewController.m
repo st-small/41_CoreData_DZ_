@@ -154,9 +154,8 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SiSCourse* course = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    SiSTeacher* teacher = course.teacher;
     SiSTeacherDetailsViewController* vc = [[SiSTeacherDetailsViewController alloc] init];
-    vc.teacher = teacher;
+    vc.teacher = course.teacher;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
