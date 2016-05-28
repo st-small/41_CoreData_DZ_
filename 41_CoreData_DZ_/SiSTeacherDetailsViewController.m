@@ -270,6 +270,34 @@ typedef enum {
     return NO;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        if (indexPath.section == SiSSectionsTypeCoursesArray) {
+            
+            SiSCourse* course = [self.courses objectAtIndex:indexPath.row];
+            [self.teacher removeCourseObject:course];
+            self.courses = [self.teacher.course allObjects];
+            
+            [tableView beginUpdates];
+            [tableView deleteRowsAtIndexPaths:@[indexPath]
+                             withRowAnimation:UITableViewRowAnimationLeft];
+            
+            if ([self.courses count] < 1) {
+                
+                [self returnBack];
+                
+            }
+            
+            [tableView endUpdates];
+        }
+        
+    }
+    
+}
+
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
     return self.isEditMode ? YES : NO;
