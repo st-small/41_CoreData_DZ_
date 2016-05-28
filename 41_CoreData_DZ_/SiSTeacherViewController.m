@@ -73,9 +73,13 @@
                                                    inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:description];
     
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"teacher.firstName != nil"];
+    
+    fetchRequest.predicate = predicate;
+    
     NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSSortDescriptor* subjectDescriptor = [[NSSortDescriptor alloc] initWithKey:@"subject" ascending:YES];
-    [fetchRequest setSortDescriptors:@[nameDescriptor, subjectDescriptor]];
+    [fetchRequest setSortDescriptors:@[subjectDescriptor, nameDescriptor]];
     
     NSFetchedResultsController* aFetchResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
